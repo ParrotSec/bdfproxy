@@ -1,0 +1,79 @@
+sudo: false
+language: python
+
+addons:
+  apt:
+    sources:
+      # Debian sid currently holds OpenSSL 1.0.2
+      # change this with future releases!
+      - debian-sid
+    packages:
+      - libssl-dev
+
+matrix:
+  fast_finish: true
+  include:
+    - python: 2.7
+    - python: 2.7
+      env: NO_ALPN=1
+    - language: generic
+      os: osx
+      osx_image: xcode7.1
+      git:
+        depth: 9999999
+    - python: 3.5
+      env: SCOPE="netlib ./test/mitmproxy/script"
+    - python: 3.5
+      env: SCOPE="netlib ./test/mitmproxy/script" NO_ALPN=1
+    - python: 2.7
+      env: DOCS=1
+      script: 'cd docs && make html'
+  allow_failures:
+    - python: pypy
+
+install:
+  - |
+    if [[ $TRAVIS_OS_NAME == "osx" ]]
+    then
+      brew update || brew update # try again if it fails
+      brew outdated openssl || brew upgrade openssl
+      brew install python
+    fi
+  - pip install -U virtualenv
+  - ./dev.sh
+  - source ./venv/bin/activate
+
+before_script:
+  - "openssl version -a"
+  - "python -c \"from OpenSSL import SSL; print(SSL.SSLeay_version(SSL.SSLEAY_VERSION))\""
+
+script:
+  - "py.test --cov netlib --cov mitmproxy --cov pathod ./test/$SCOPE"
+
+after_success:
+  - coveralls
+  - |
+    if [[ $TRAVIS_OS_NAME == "osx" && $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" ]]
+    then
+        pip install -e ./release
+        python ./release/rtool.py bdist
+        python ./release/rtool.py upload-snapshot --bdist --wheel
+    fi
+
+notifications:
+  irc:
+    channels:
+      - "irc.oftc.net#mitmproxy"
+    on_success: change
+    on_failure: always
+  slack:
+    rooms:
+      - mitmproxy:YaDGC9Gt9TEM7o8zkC2OLNsu#ci
+    on_success: always
+    on_failure: always
+
+cache:
+  directories:
+    - $HOME/.cache/pip
+    - $HOME/.pyenv
+    - $HOME/Library/Caches/pip

@@ -1,11 +1,13 @@
 
-#The Backdoor Factory Proxy (BDFProxy) v0.3.5
+#The Backdoor Factory Proxy (BDFProxy) v0.3.8
+
+
 For security professionals and researchers only.
 
-###NOW ONLY WORKS WITH v.0.16 >= MITMPROXY >= v.0.11 
+[![Join the chat at https://gitter.im/secretsquirrel/BDFProxy](https://badges.gitter.im/secretsquirrel/BDFProxy.svg)](https://gitter.im/secretsquirrel/BDFProxy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  [![Black Hat Arsenal](https://www.toolswatch.org/badges/arsenal/2015.svg)](https://www.blackhat.com/us-15/arsenal.html)
 
-Because MITMPROXY moved libmproxy to mitmproxy (library naming), we'll be stuck at v.0.16 until everything is updated.
-Get it here: https://github.com/mitmproxy/mitmproxy/tree/v0.16
+
+###NOW ONLY WORKS WITH v.0.17 >= MITMPROXY >= v.0.11 
 
 Docker:
 ```
@@ -152,7 +154,32 @@ We have it.  The proxy window will quickly fill with massive amounts of cat link
 	-Logical plant at your favorite ISP
 
 
+##Bug Reporting
+
+Bugs happen, but if I can't understand your issue, I can't help you.
+
+Submit issues here: https://github.com/secretsquirrel/BDFProxy/issues
+
+Include the following information from the output of the these commands (use pastebin for the longer commands):
+
+```
+# bdfproxy only supports v11 -> v17
+$ mitmproxy --version
+
+$ uname -a
+
+# Use pastebin perhaps
+$ cat bdfproxy.cfg 
+$ ./bdf_proxy.py
+
+```
+
+
 ###Change Log:
+
+####07/04/2016
+
+Support for BDF Preprocessor and mitmProxy v17
 
 ####12/20/2015
 
