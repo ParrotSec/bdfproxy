@@ -1,5 +1,0 @@
-bdf_proxy.py usr/share/bdfproxy/
-test_script.sh usr/share/bdfproxy/
-wpBDF.sh usr/share/bdfproxy/
-bdfproxy.cfg etc/bdfproxy/
-debian/helper-scripts/bdfproxy usr/bin/
