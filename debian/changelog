@@ -1,0 +1,11 @@
+bdfproxy (0.3.9-0parrot1) testing; urgency=medium
+
+  * Fix build configuration
+
+ -- Lisetta "Sheireen" Ferrero <sheireen@autistiche.org>  Sat, 16 Jul 2016 05:22:52 +0400
+
+bdfproxy (0.3.9-0parrot0) testing; urgency=medium
+
+  * Import into Parrot repo
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Sat, 16 Jul 2016 03:00:33 +0200

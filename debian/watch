@@ -1,0 +1,2 @@
+version=3
+https://github.com/secretsquirrel/BDFProxy/tags .*/(.*)\.tar\.gz
